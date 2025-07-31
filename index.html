@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shreedhar Kolur - Java Full-Stack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Dark Theme (Default) --- */
+        :root {
+            --background-color: #121212;
+            --surface-color: #1E1E1E;
+            --primary-text-color: #EAEAEA;
+            --secondary-text-color: #A0A0A0;
+            --accent-color: #e74c3c; /* Red */
+            --border-color: #2c2c2c;
+        }
+
+        /* --- Light Theme --- */
+        body.light-mode {
+            --background-color: #f4f7f6;
+            --surface-color: #ffffff;
+            --primary-text-color: #2c3e50;
+            --secondary-text-color: #7f8c8d;
+            --accent-color: #3498db; /* Blue */
+            --border-color: #ecf0f1;
+        }
+
+        /* --- General & Body Styles --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.7;
+            background-color: var(--background-color);
+            color: var(--primary-text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 2rem;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-text-color);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+        }
+        
+        .section-title-container {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title-container p {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        p {
+            color: var(--secondary-text-color);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 0.9rem 1.8rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border: 2px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--accent-color);
+        }
+
+        /* --- Header & Navigation --- */
+        .navbar {
+            background-color: rgba(30, 30, 30, 0.85);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        body.light-mode .navbar {
+             background-color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            color: var(--primary-text-color);
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--primary-text-color);
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        #theme-toggle {
+            background: none;
+            border: none;
+            color: var(--primary-text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            transition: transform 0.2s ease-in-out, color 0.3s ease;
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        /* --- Sections --- */
+        .section {
+            padding: 7rem 0 4rem;
+            transition: background-color 0.3s ease;
+        }
+
+        /* --- Home/Hero Section --- */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: var(--background-color);
+        }
+        
+        #home h1 {
+            font-size: 4.5rem;
+        }
+
+        #home .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+        }
+
+        .home-skills {
+            margin-top: 3rem;
+        }
+
+        .home-skills h3 {
+            color: var(--secondary-text-color);
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .home-skills-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+        }
+
+        .home-skill-item {
+            color: var(--primary-text-color);
+            background: var(--surface-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .home-skill-item {
+            color: var(--secondary-text-color);
+        }
+
+        .home-skill-item:hover {
+            background: var(--accent-color);
+            color: #fff;
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        /* --- About Me Section --- */
+        #about {
+            background-color: var(--surface-color);
+        }
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-photo {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            justify-self: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border: 2px solid var(--border-color);
+        }
+        
+        /* --- Skills Section --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .skill-card {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: var(--accent-color);
+        }
+        .skill-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Projects Section --- */
+        #projects {
+             background-color: var(--surface-color);
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: var(--background-color);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-tags {
+            margin: 1rem 0;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: var(--surface-color);
+            color: var(--secondary-text-color);
+            padding: 0.3rem 0.7rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        /* --- Internship & Certifications --- */
+        #internship {
+            background-color: var(--background-color);
+        }
+        #certifications {
+            background-color: var(--surface-color);
+        }
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline-item {
+            padding: 1rem 2rem;
+            position: relative;
+            background: var(--surface-color);
+            border-left: 3px solid var(--accent-color);
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+            transition: background-color 0.3s ease;
+        }
+        
+        /* --- Contact Section --- */
+        #contact {
+            background-color: var(--background-color);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--background-color);
+            color: var(--secondary-text-color);
+            border-top: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        body.light-mode footer {
+            background: var(--primary-text-color);
+            color: var(--surface-color);
+        }
+        
+        /* --- Hamburger & Responsive Design --- */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--primary-text-color);
+            transition: all 0.3s ease-in-out;
+        }
+        
+        @media(max-width: 992px) {
+             #home h1 { font-size: 3.5rem; }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .about-photo {
+                order: -1;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media(max-width: 768px) {
+            #home h1 { font-size: 2.8rem; }
+            #home .subtitle { font-size: 1.2rem; }
+            h2 { font-size: 2rem; }
+            
+            .nav-menu {
+                display: none;
+                position: fixed;
+                left: -100%;
+                top: 67px;
+                flex-direction: column;
+                background-color: var(--surface-color);
+                width: 100%;
+                height: 100vh;
+                text-align: center;
+                transition: 0.3s;
+                padding-top: 2rem;
+                border-top: 1px solid var(--border-color);
+            }
+
+            .nav-right {
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+                left: 0;
+            }
+
+            .nav-item {
+                padding: 1rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="#home" class="nav-logo">Shreedhar Kolur</a>
+                <div class="nav-right">
+                    <ul class="nav-menu">
+                        <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                        <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                        <li class="nav-item"><a href="#internship" class="nav-link">Internship</a></li>
+                        <li class="nav-item"><a href="#certifications" class="nav-link">Certifications</a></li>
+                        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <div class="nav-controls">
+                        <button id="theme-toggle" title="Toggle theme">🌙</button>
+                        <div class="hamburger">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="container">
+                <h1 class="animate-in">Java Full-Stack Developer</h1>
+                <p class="subtitle">Building robust applications with a focus on clean code and user-centric design.</p>
+                <a href="#projects" class="btn">View My Work</a>
+                <div class="home-skills">
+                    <h3>Core Skills</h3>
+                    <div class="home-skills-list">
+                        <div class="home-skill-item">Core Java</div>
+                        <div class="home-skill-item">Spring Boot</div>
+                        <div class="home-skill-item">Hibernate</div>
+                        <div class="home-skill-item">JDBC</div>
+                        <div class="home-skill-item">Web Technologies</div>
+                        <div class="home-skill-item">SQL</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <div class="about-content">
+                    <div>
+                        <img src="about.jpg" alt="A photo of Shreedhar Kolur" class="about-photo">
+                    </div>
+                    <div>
+                        <div class="section-title-container" style="text-align: left;">
+                            <h2>About Me</h2>
+                        </div>
+                        <p>
+                           I am a dedicated and ambitious Computer Science and Engineering graduate from Sahyadri College of Engineering and Management, Mangaluru, (YOP 2025). My academic journey has provided me with a strong foundation in software development, with a special focus on Java, the Spring Framework, and web technologies.
+
+                        </p>
+                        <p>
+                            Driven by a passion for solving complex problems, I am committed to writing clean, efficient, and impactful code. I am currently seeking new opportunities to apply my skills and contribute to innovative and meaningful projects.
+                        </p>
+                         <a href="SSK_CV.pdf" class="btn">Download Resume</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills" class="section">
+            <div class="container">
+                <div class="section-title-container">
+                    <h2>Technical Expertise</h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h3>Core Java</h3>
+                        <p>Strong foundation in object-oriented programming, data structures, and core Java principles.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Spring Boot</h3>
+                        <p>Building RESTful APIs and microservices with the Spring Framework for rapid application development.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Hibernate</h3>
+                        <p>Utilizing Hibernate for object-relational mapping (ORM) to manage database interactions efficiently.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>JDBC</h3>
+                        <p>Experience with Java Database Connectivity for direct interaction with relational databases.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Web Technologies</h3>
+                        <p>Creating responsive front-end interfaces with HTML, CSS, JavaScript, and Bootstrap.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>SQL</h3>
+                        <p>Proficient in writing complex queries and managing databases, primarily with MySQL.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="section-title-container">
+                    <h2>Featured Projects</h2>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Multi-Crop Multi-Disease Detection</h3>
+                            <p>Designed and implemented a CNN-based model for real-time plant disease detection, enhancing sustainability in agriculture.</p>
+                            <div class="project-tags">
+                                <span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">CNN</span>
+                            </div>
+                            <a href="https://github.com/shreedharS/Vanaspati">Source Code &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                         <div class="project-content">
+                            <h3>Library Management System</h3>
+                            <p>A web application that automates library operations, providing administrators with tools to manage inventory and user accounts.</p>
+                             <div class="project-tags">
+                                <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">PHP</span><span class="tag">MySQL</span>
+                            </div>
+                            <a href="https://github.com/shreedharS/library-management-system-">Source Code &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                         <div class="project-content">
+                            <h3>Cryptic Canvas</h3>
+                            <p>Developed a steganography tool to hide encrypted text within images securely and invisibly using Python.</p>
+                             <div class="project-tags">
+                                 <span class="tag">Python</span><span class="tag">Steganography</span>
+                            </div>
+                            <a href="https://github.com/shreedharS/Cryptic-Canvas">Source Code &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="internship" class="section">
+            <div class="container">
+                <div class="section-title-container">
+                      <h2>Experience</h2>
+                      <p>My professional experience as an intern.</p>
+                </div>
+                 <div class="timeline">
+                    <div class="timeline-item">
+                          <h3>Full Stack Developer Intern</h3>
+                          <p><em>Guidance under Mr. Shankar Narayan</em></p>
+                          <ul>
+                              <li>Developed and maintained full-stack web applications using Java and Spring Boot.</li>
+                              <li>Collaborated with senior developers on designing scalable REST APIs.</li>
+                              <li>Built responsive user interfaces with HTML, CSS, and JavaScript.</li>
+                              <li>Followed agile development practices and version control with Git.</li>
+                          </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="section">
+            <div class="container">
+                <div class="section-title-container">
+                      <h2>Certifications</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item"><h3>MERN Stack Web Development</h3><p>Issued 2024</p></div>
+                    <div class="timeline-item"><h3>Database and SQL</h3><p>Infosys Springboard</p></div>
+                    <div class="timeline-item"><h3>Intelligent Document Processing with Azure AI</h3><p>Microsoft</p></div>
+                    <div class="timeline-item"><h3>JobReady Employability Skills</h3><p>Wadhwani Foundation (2023)</p></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-title-container">
+                    <h2>Get In Touch</h2>
+                    <p>I'm currently seeking new opportunities and am open to collaboration. Feel free to reach out!</p>
+                </div>
+                <div style="text-align: center;">
+                    <a href="mailto:shreedharsk14@gmail.com" class="btn">Say Hello</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Shreedhar Kolur. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu hamburger
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        navLinks.forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
+
+        // Theme Switcher
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                body.classList.add('light-mode');
+                themeToggle.textContent = '☀️';
+            } else {
+                body.classList.remove('light-mode');
+                themeToggle.textContent = '🌙';
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        applyTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = body.classList.contains('light-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
+        });
+    </script>
+</body>
+</html>
